@@ -1,11 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = 3000;
 
 app.use(express.json());
 
+app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/products', require('./routes/product.routes'));
+app.use('/api/orders', require('./routes/order.routes'));
 
-
-app.listen(port, () => {  
-    console.log(`Example app listening at http://localhost:${port}`);
-});
+app.listen(5000, ()=> console.log("Server running on port 5000"));
