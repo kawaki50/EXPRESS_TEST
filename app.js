@@ -7,5 +7,8 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/products', require('./routes/product.routes'));
 app.use('/api/orders', require('./routes/order.routes'));
+app.use('/api/admin', require('./routes/admin.routes'));
 
-app.listen(5000, ()=> console.log("Server running on port 5000"));
+app.listen(5000, () => {
+  console.log("🚀 Server running on http://localhost:5000");
+});
