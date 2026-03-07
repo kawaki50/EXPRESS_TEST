@@ -1,8 +1,25 @@
 const Product = require('../models/Product');
 
+// exports.getProducts = async (req, res) => {
+//   const products = await Product.getAll();
+//   res.json(products);
+// };
+
 exports.getProducts = async (req, res) => {
-  const products = await Product.getAll();
-  res.json(products);
+
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
+  const offset = (page - 1) * limit;
+
+  const products = await Product.getProductsPaginated(limit, offset);
+
+  res.json({
+    page,
+    limit,
+    products
+  });
+
 };
 
 exports.getProduct = async (req, res) => {

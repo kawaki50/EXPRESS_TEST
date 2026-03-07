@@ -27,3 +27,11 @@ exports.update = async (id, name, description, price, stock) => {
 exports.delete = async (id) => {
   await db.query("DELETE FROM products WHERE id=?", [id]);
 };
+
+exports.getProductsPaginated = async (limit, offset) => {
+  const [rows] = await db.query(
+    "SELECT * FROM products LIMIT ? OFFSET ?",
+    [limit, offset]
+  );
+  return rows;
+};
