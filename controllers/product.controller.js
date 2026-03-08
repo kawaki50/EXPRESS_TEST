@@ -1,5 +1,5 @@
 const Product = require('../models/Product');
-
+const { productSchema } = require('../validation/product.validation');
 // exports.getProducts = async (req, res) => {
 //   const products = await Product.getAll();
 //   res.json(products);
@@ -29,6 +29,13 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.createProduct = async (req, res) => {
+  const { error } = productSchema.validate(req.body);
+// Validation des données d'entrée
+  if (error) {
+    return res.status(400).json({
+      message: error.details[0].message
+    });
+  }
   const { name, description, price, stock } = req.body;
   await Product.create(name, description, price, stock);
   res.status(201).json({ message: "Produit créé" });
