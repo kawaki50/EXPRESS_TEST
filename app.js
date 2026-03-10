@@ -1,7 +1,11 @@
 require('dotenv').config();
+
 const express = require('express');
 const errorMiddleware = require('./middleware/error.middleware');
 const app = express();
+const morgan = require('morgan');
+
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(errorMiddleware);
 
