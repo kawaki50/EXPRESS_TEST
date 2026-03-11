@@ -37,13 +37,17 @@ exports.createProduct = async (req, res) => {
     });
   }
   const { name, description, price, stock } = req.body;
-  await Product.create(name, description, price, stock);
-  res.status(201).json({ message: "Produit créé" });
+  // récupération de l'image uploadée
+  const image = req.file ? req.file.filename : null;
+  await Product.create(name, description, price, stock, image);
+  res.status(201).json({ message: "Produit créé", image: image});
 };
 
 exports.updateProduct = async (req, res) => {
   const { name, description, price, stock } = req.body;
-  await Product.update(req.params.id, name, description, price, stock);
+  // récupération de l'image uploadée
+  const image = req.file ? req.file.filename : null;
+  await Product.update(req.params.id, name, description, price, stock, image);
   res.json({ message: "Produit modifié" });
 };
 

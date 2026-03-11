@@ -10,17 +10,17 @@ exports.getById = async (id) => {
   return rows[0];
 };
 
-exports.create = async (name, description, price, stock) => {
+exports.create = async (name, description, price, stock, image) => {
   await db.query(
-    "INSERT INTO products (name, description, price, stock) VALUES (?, ?, ?, ?)",
-    [name, description, price, stock]
+    "INSERT INTO products (name, description, price, stock, image) VALUES (?, ?, ?, ?, ?)",
+    [name, description, price, stock, image]
   );
 };
 
-exports.update = async (id, name, description, price, stock) => {
+exports.update = async (id, name, description, price, stock,image) => {
   await db.query(
-    "UPDATE products SET name=?, description=?, price=?, stock=? WHERE id=?",
-    [name, description, price, stock, id]
+    "UPDATE products SET name=?, description=?, price=?, stock=?, image=? WHERE id=?",
+    [name, description, price, stock,image, id]
   );
 };
 
